@@ -1,0 +1,13 @@
+https://games-cn.org/forums/topic/zuoye5dibanduijiaoxianshangdexiangsuweibeizhengquexuanranwenti/
+
+如图1所示，放大后可以发现，地板上有些像素为蓝色(背景色)，并没有被正确渲染。
+这些像素有一个特点，就是都位于地板的对角线上，而地板是由两块三角形拼接而成的，两个三角形接缝处的点位于三角形的边上，而边上的点有一个重心坐标为0，
+推测问题原因是float精度。
+因此，在判断点是否在三角形内时，将函数rayTriangleIntersect中的判断条件
+if (tnear > 0 && u > 0 && v > 0 && (1 – u – v) > 0)
+改成
+if (tnear + EPSILON > 0 && u + EPSILON > 0 &&
+v +EPSILON > 0 && (1 – u – v + EPSILON) > 0)
+即可解决问题，EPSILON为一常数，和scene中定义的值相同(均为0.00001)，得到的结果如图2所示，可见地板对角线上的蓝色点消失。
+
+
