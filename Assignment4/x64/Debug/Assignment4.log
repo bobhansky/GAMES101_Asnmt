@@ -1,0 +1,67 @@
+﻿  main.cpp
+D:\Documents\GAMES101_HW_primitive\Assignment4\main.cpp(30,44): warning C4244: “参数”: 从“_Tp”转换到“int”，可能丢失数据
+          with
+          [
+              _Tp=float
+          ]
+D:\Documents\GAMES101_HW_primitive\Assignment4\main.cpp(30,35): warning C4244: “参数”: 从“_Tp”转换到“int”，可能丢失数据
+          with
+          [
+              _Tp=float
+          ]
+D:\Documents\GAMES101_HW_primitive\Assignment4\main.cpp(60,62): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Documents\GAMES101_HW_primitive\Assignment4\main.cpp(61,44): warning C4244: “参数”: 从“_Tp”转换到“int”，可能丢失数据
+          with
+          [
+              _Tp=float
+          ]
+D:\Documents\GAMES101_HW_primitive\Assignment4\main.cpp(61,35): warning C4244: “参数”: 从“_Tp”转换到“int”，可能丢失数据
+          with
+          [
+              _Tp=float
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\xmemory(680,68): warning C4244: “参数”: 从“int”转换到“_Tp”，可能丢失数据
+          with
+          [
+              _Tp=float
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\vector(813): message : 查看对正在编译的函数 模板 实例化“void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int&,int&>(_Alloc &,_Objty *const ,int &,int &)”的引用
+          with
+          [
+              _Alloc=std::allocator<cv::Point2f>,
+              _Ty=cv::Point_<float>,
+              _Objty=cv::Point_<float>
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\vector(824): message : 查看对正在编译的函数 模板 实例化“void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int&,int&>(_Alloc &,_Objty *const ,int &,int &)”的引用
+          with
+          [
+              _Alloc=std::allocator<cv::Point2f>,
+              _Ty=cv::Point_<float>,
+              _Objty=cv::Point_<float>
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\vector(800): message : 查看对正在编译的函数 模板 实例化“_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<int&,int&>(int &,int &)”的引用
+          with
+          [
+              _Ty=cv::Point2f
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\vector(806): message : 查看对正在编译的函数 模板 实例化“_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<int&,int&>(int &,int &)”的引用
+          with
+          [
+              _Ty=cv::Point2f
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\vector(886): message : 查看对正在编译的函数 模板 实例化“_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<int&,int&>(int &,int &)”的引用
+          with
+          [
+              _Ty=cv::Point2f
+          ]
+D:\Software\VS2022\IDE\VC\Tools\MSVC\14.32.31326\include\vector(888): message : 查看对正在编译的函数 模板 实例化“_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<int&,int&>(int &,int &)”的引用
+          with
+          [
+              _Ty=cv::Point2f
+          ]
+D:\Documents\GAMES101_HW_primitive\Assignment4\main.cpp(14): message : 查看对正在编译的函数 模板 实例化“_Ty &std::vector<_Ty,std::allocator<_Ty>>::emplace_back<int&,int&>(int &,int &)”的引用
+          with
+          [
+              _Ty=cv::Point2f
+          ]
+  Assignment4.vcxproj -> D:\Documents\cpp_workplace\CG\GAMES101\Assignments\x64\Debug\Assignment4.exe
