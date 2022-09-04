@@ -1,6 +1,6 @@
 # GAMES101_Asnmt
 #### IMPORTANT: Projects Framework are provided by https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html
-#### Student(LIKE ME) only implements some core algorithm in these projects.
+#### Student(LIKE ME) only implements some core algorithms in these projects.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
