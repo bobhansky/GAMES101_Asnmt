@@ -3,7 +3,7 @@
 #### Student(LIKE ME) only implements some core algorithms in these projects.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-
+# My Results:
 ## A1: rasterization the triangle to screen and support rotation
 
 
