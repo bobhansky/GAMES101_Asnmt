@@ -1,81 +1,24 @@
-﻿  Texture.cpp
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Texture.cpp(13,32): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Texture.cpp(14,31): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Texture.cpp(15,32): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Texture.cpp(16,31): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-  Triangle.cpp
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Triangle.cpp(38,63): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Triangle.cpp(38,49): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\Triangle.cpp(38,35): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
-  main.cpp
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\OBJ_Loader.h(951,33): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(31,27): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(71,13): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(126,62): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(128,65): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(181,62): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(183,65): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(225,62): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(227,65): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(243,19): warning C4305: “初始化”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(243,29): warning C4305: “初始化”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(266,13): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(267,13): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(290,62): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(292,65): warning C4305: “参数”: 从“double”到“const float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(307,19): warning C4305: “初始化”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(307,29): warning C4305: “初始化”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(331,13): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(332,13): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(454,64): warning C4305: “参数”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(472,64): warning C4305: “参数”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(486,25): warning C4305: “-=”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(490,25): warning C4305: “+=”: 从“double”到“float”截断
-  rasterizer.cpp
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(58,10): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(59,10): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(60,13): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(61,13): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(69,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(70,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(71,16): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(75,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(76,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(77,16): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(109,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(110,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(111,16): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(115,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(116,15): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(117,16): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(160,18): warning C4244: “参数”: 从“int”转换到“const float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(160,16): warning C4244: “参数”: 从“int”转换到“const float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(175,32): warning C4305: “初始化”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(176,32): warning C4305: “初始化”: 从“double”到“float”截断
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(217,33): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(218,34): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(267,14): warning C4244: “初始化”: 从“const _Ty”转换到“int”，可能丢失数据
-          with
-          [
-              _Ty=float
-          ]
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(268,14): warning C4244: “初始化”: 从“const _Ty”转换到“int”，可能丢失数据
-          with
-          [
-              _Ty=float
-          ]
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(269,14): warning C4244: “初始化”: 从“const _Ty”转换到“int”，可能丢失数据
-          with
-          [
-              _Ty=float
-          ]
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(270,14): warning C4244: “初始化”: 从“const _Ty”转换到“int”，可能丢失数据
-          with
-          [
-              _Ty=float
-          ]
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(277,77): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(277,68): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\rasterizer.cpp(278,36): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-  正在生成代码...
+﻿  main.cpp
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\OBJ_Loader.h(951,33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(32,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(57,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(105,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(160,62): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(162,65): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(218,62): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(220,65): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(262,62): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(264,65): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(280,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(280,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(303,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(304,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(327,62): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(329,65): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(344,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(344,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(368,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(369,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(496,64): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment3\main.cpp(517,66): warning C4305: 'argument': truncation from 'double' to 'float'
   Assignment3.vcxproj -> D:\Documents\cpp_workplace\CG\GAMES101\Assignments\x64\Debug\Assignment3.exe

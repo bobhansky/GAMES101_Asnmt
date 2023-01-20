@@ -13,16 +13,16 @@ bool rayTriangleIntersect(const Vector3f& v0, const Vector3f& v1, const Vector3f
     // Also don't forget to update tnear, u and v.
     // tnear为时间 沿着三角形方向 t的为正    https://blog.csdn.net/weixin_49397205/article/details/115311298
     // u,v 为重心坐标前的参数 都得为非负的还得小于1
-    
+    // tnear, u, v 是你需要使用我们课上推导的 Moller-Trumbore 算法来更新的参数。
+    // 
     // Moller Trumbore Algorithm
-
-   
+    // v0 v1 v2   3 vertices of the triangle
     // My first result
 
     Vector3f E1 = v1 - v0;
     Vector3f E2 = v2 - v0;          // v2 - v1   get the strange res
     Vector3f S = orig - v0;
-    Vector3f S1 = crossProduct(dir, E2);
+    Vector3f S1 = crossProduct(dir, E2);        // pvec
     Vector3f S2 = crossProduct(S, E1);
 
     Vector3f rightVec(dotProduct(S2, E2), dotProduct(S1, S), dotProduct(S2, dir));

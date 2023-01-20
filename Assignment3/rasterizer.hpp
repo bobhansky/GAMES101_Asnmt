@@ -103,7 +103,7 @@ namespace rst
         std::map<int, std::vector<Eigen::Vector3f>> col_buf;
         std::map<int, std::vector<Eigen::Vector3f>> nor_buf;
 
-        std::optional<Texture> texture;     // optional: https://wenku.baidu.com/view/1f27e6042c60ddccda38376baf1ffc4ffe47e2cf.html
+        std::optional<Texture> texture;     // optional: https://wenku.baidu.com/view/1f27e6042c60ddccda38376baf1ffc4ffe47e2cf.html  noted by boki
 
         std::function<Eigen::Vector3f(fragment_shader_payload)> fragment_shader;
         std::function<Eigen::Vector3f(vertex_shader_payload)> vertex_shader;

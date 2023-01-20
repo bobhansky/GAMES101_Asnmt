@@ -9,6 +9,7 @@
 #include "Texture.hpp"
 #include "OBJ_Loader.h"
 
+#define LERP true
 
 Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
 {
@@ -29,13 +30,14 @@ Eigen::Matrix4f get_model_matrix(float angle)
 {
     Eigen::Matrix4f rotation;
     angle = angle * MY_PI / 180.f;
+    // rotation around y axis
     rotation << cos(angle), 0, sin(angle), 0,
                 0, 1, 0, 0,
                 -sin(angle), 0, cos(angle), 0,
                 0, 0, 0, 1;
 
     Eigen::Matrix4f scale;
-    scale << 2.5, 0, 0, 0,
+    scale << 2.5, 0, 0, 0,          // original 2.5 on each axis
               0, 2.5, 0, 0,
               0, 0, 2.5, 0,
               0, 0, 0, 1;
@@ -47,6 +49,38 @@ Eigen::Matrix4f get_model_matrix(float angle)
             0, 0, 0, 1;
 
     return translate * rotation * scale;
+}
+
+// my enhancement part   10/11/2022
+Eigen::Matrix4f get_rotation_matrix(float rota_angle, Eigen::Vector3f& axis) {
+    // convert degrees to radians
+    rota_angle = (rota_angle / 180) * MY_PI;
+
+    Eigen::Vector3f normAxis = axis.normalized();
+    Eigen::Matrix4f res = Eigen::Matrix4f::Zero();
+    res(3, 3) = 1;  // 0 0 0 1 last row
+
+    Eigen::Matrix3f identity = Eigen::Matrix3f::Identity();
+    Eigen::Matrix3f N;
+    N << 0, -normAxis.z(), normAxis.y(),
+        normAxis.z(), 0, -normAxis.x(),
+        -normAxis.y(), normAxis.x(), 0;
+
+    N = std::cos(rota_angle) * identity + (1 - std::cos(rota_angle)) * normAxis * normAxis.transpose()
+        + sin(rota_angle) * N;
+
+    // block   https://eigen.tuxfamily.org/dox/group__TutorialBlockOperations.html
+    // starting at (i,j) Block of size (p,q),   matrix.block(i,j,p,q);
+    res.block(0, 0, 2, 2) = N.block(0, 0, 2, 2);
+
+    Eigen::Matrix4f scale;
+    scale << 2.5, 0, 0, 0,          // original 2.5 on each axis
+        0, 2.5, 0, 0,
+        0, 0, 2.5, 0,
+        0, 0, 0, 1;
+
+    res = scale * res;
+    return res;
 }
 
 
@@ -127,7 +161,7 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f kd = payload.color;                 // diffuse coefficient,   color
     Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);       // Ks 一般是一个白色的镜面反射系数
 
-    auto l1 = light{ {20, 20, 20}, {500, 500, 500} };
+    auto l1 = light{ {20, 20, 20}, {500, 500, 500} };       // position and intensity
     auto l2 = light{ {-20, 20, 0}, {500, 500, 500} };
 
     std::vector<light> lights = { l1, l2 };
@@ -136,7 +170,7 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
 
     float p = 150;
 
-    Eigen::Vector3f color = payload.color;
+    Eigen::Vector3f color = payload.color;      // not used, so what is it?
     Eigen::Vector3f point = payload.view_pos;
     Eigen::Vector3f normal = payload.normal;
 
@@ -147,7 +181,7 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
         // components are. Then, accumulate that result on the *result_color* object.
 
         Eigen::Vector3f l = (light.position - point).normalized();      // light direction
-        Eigen::Vector3f v = (eye_pos - point).normalized();     // view direction
+        Eigen::Vector3f v = ( - point).normalized();     // view direction     0 - point 
         Eigen::Vector3f h = (v + l) / (v + l).norm();           // bisector 半程向量
 
         float r_2 = (light.position - point).dot(light.position - point);     // or r_2 = (l-point).squaredNorm()
@@ -170,9 +204,12 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
 {
     Eigen::Vector3f return_color = {0, 0, 0};
     if (payload.texture)
-    {
+    {   
         // TODO: Get the texture value at the texture coordinates of the current fragment
-        return_color = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y());
+        if (LERP) {
+            return_color = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y());
+        }
+        else return_color = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y());
     }
 
     Eigen::Vector3f texture_color;
@@ -373,15 +410,18 @@ int main(int argc, const char** argv)
 {
     std::vector<Triangle*> TriangleList;
 
-    float angle = 140.0;
+    float angle = 140;        // original 140
     bool command_line = false;
 
     std::string filename = "output.png";
     objl::Loader Loader;
     std::string obj_path = "./models/spot/";
+    std::string obj_rock_path = "./models/rock/";
 
     // Load .obj File
-    bool loadout = Loader.LoadFile("./models/spot/spot_triangulated_good.obj");
+     bool loadout = Loader.LoadFile("./models/spot/spot_triangulated_good.obj");      // cow model
+    //bool loadout = Loader.LoadFile(obj_rock_path + "rock.obj");   // no scaling in model matrix
+
     for(auto mesh:Loader.LoadedMeshes)
     {
         for(int i=0;i<mesh.Vertices.size();i+=3)
@@ -399,11 +439,13 @@ int main(int argc, const char** argv)
 
     rst::rasterizer r(700, 700);
 
-    auto texture_path = "hmap.jpg";                     // !!!!!! 
+    auto texture_path = "spot_texture.png";                     // change texture directory  
+    std::string rock_texture_path = "rock.png";
     r.set_texture(Texture(obj_path + texture_path));
+   // r.set_texture(Texture(obj_rock_path + rock_texture_path));
 
     // wrapping 
-    std::function<Eigen::Vector3f(fragment_shader_payload)> active_shader = displacement_fragment_shader;
+    std::function<Eigen::Vector3f(fragment_shader_payload)> active_shader = phong_fragment_shader;
 
     if (argc >= 2)
     {
@@ -467,9 +509,12 @@ int main(int argc, const char** argv)
     {
         r.clear(rst::Buffers::Color | rst::Buffers::Depth);
 
-        r.set_model(get_model_matrix(angle));
+        r.set_model(get_model_matrix(angle));     // original
+        //Eigen::Vector3f axis;
+        //axis << -1, 1, 0;
+        //r.set_model(get_rotation_matrix(angle, axis));       // still doesn't work ??? why? idk
         r.set_view(get_view_matrix(eye_pos));
-        r.set_projection(get_projection_matrix(45.0, 1, 0.1, 50));
+        r.set_projection(get_projection_matrix(45.0, 1, -0.1, -50));
 
         //r.draw(pos_id, ind_id, col_id, rst::Primitive::Triangle);
         r.draw(TriangleList);
@@ -483,11 +528,11 @@ int main(int argc, const char** argv)
 
         if (key == 'a' )
         {
-            angle -= 0.1;
+            angle -= 10;
         }
         else if (key == 'd')
         {
-            angle += 0.1;
+            angle += 10;
         }
 
     }

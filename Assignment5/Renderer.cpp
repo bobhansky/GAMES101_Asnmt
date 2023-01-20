@@ -80,7 +80,7 @@ float fresnel(const Vector3f &I, const Vector3f &N, const float &ior)
 // \param[out] *hitObject stores the pointer to the intersected object (used to retrieve material information, etc.)
 // \param isShadowRay is it a shadow ray. We can return from the function sooner as soon as we have found a hit.
 // [/comment]
-std::optional<hit_payload> trace(
+std::optional<hit_payload> trace(           // optional can be read as true or false
         const Vector3f &orig, const Vector3f &dir,
         const std::vector<std::unique_ptr<Object> > &objects)
 {
@@ -140,7 +140,9 @@ Vector3f castRay(
             case REFLECTION_AND_REFRACTION:
             {
                 Vector3f reflectionDirection = normalize(reflect(dir, N));
-                Vector3f refractionDirection = normalize(refract(dir, N, payload->hit_obj->ior));
+                Vector3f refractionDirection = normalize(refract(dir, N, payload->hit_obj->ior));   // snell's law
+                // If the dot product is negative then the angle is greater than 90 degrees 
+                // and one vector has a component in the opposite direction of the other
                 Vector3f reflectionRayOrig = (dotProduct(reflectionDirection, N) < 0) ?
                                              hitPoint - N * scene.epsilon :
                                              hitPoint + N * scene.epsilon;
@@ -167,7 +169,7 @@ Vector3f castRay(
             default:
             {
                 // [comment]
-                // We use the Phong illumation model int the default case. The phong model
+                // We use the Phong illumation model in the default case. The phong model
                 // is composed of a diffuse and a specular reflection component.
                 // [/comment]
                 Vector3f lightAmt = 0, specularColor = 0;
@@ -214,12 +216,12 @@ void Renderer::Render(const Scene& scene)
 {
     std::vector<Vector3f> framebuffer(scene.width * scene.height);
 
-    float scale = std::tan(deg2rad(scene.fov * 0.5f));      // half height : (nearPlane.z() - 0)   t:1 in this case
+    float scale = std::tan(deg2rad(scene.fov * 0.5f));      // half height : (nearPlane.z() - 0)   t:1 in this case: line 262 z == -1
     float imageAspectRatio = scene.width / (float)scene.height;
 
     // Use this variable as the eye position to start your rays.
     Vector3f eye_pos(0);        // (0,0,0)
-    int m = 0;
+    int m = 0;                  // buffer index
 
     // 空间坐标   space coordinate
     float l, r, t, b;
@@ -254,7 +256,7 @@ void Renderer::Render(const Scene& scene)
             px -= (scene.width / 2.0f);
             py -= (scene.height / 2.0f);
 
-            // scale to h and w
+            // scale to h and w     space coordinate
             x = px * (w / scene.width);
             y = py * (h / scene.height);
 
@@ -305,4 +307,5 @@ castRay函数中的菲涅尔函数是为了计算光线照射到一个物体后�
 
 https://zhuanlan.zhihu.com/p/438520487
 
+https://zhuanlan.zhihu.com/p/548422361
 */

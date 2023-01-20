@@ -89,7 +89,7 @@ class Bounds3
 };
 
 
-
+// test if ray bound intersects
 inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
                                 const std::array<int, 3>& dirIsNeg) const
 {
@@ -98,8 +98,8 @@ inline bool Bounds3::IntersectP(const Ray& ray, const Vector3f& invDir,
     // TODO test if ray bound intersects
     
     // my notebook P13
-    float tmin_x = (pMin.x - ray.origin.x) * invDir.x;
-    float tmax_x = (pMax.x - ray.origin.x) * invDir.x;
+    float tmin_x = (pMin.x - ray.origin.x) * invDir.x;      // first time ray gets into box in x direction
+    float tmax_x = (pMax.x - ray.origin.x) * invDir.x;      // first time ray leaves box in x direction
 
     float tmin_y = (pMin.y - ray.origin.y) * invDir.y;
     float tmax_y = (pMax.y - ray.origin.y) * invDir.y;
