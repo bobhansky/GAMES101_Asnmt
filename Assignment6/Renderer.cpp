@@ -18,16 +18,18 @@ void Renderer::Render(const Scene& scene)
 {
     std::vector<Vector3f> framebuffer(scene.width * scene.height);
 
-    float scale = tan(deg2rad(scene.fov * 0.5));
+    float scale = tan(deg2rad(scene.fov * 0.5));        // h : near plane
     float imageAspectRatio = scene.width / (float)scene.height;
     Vector3f eye_pos(-1, 5, 10);
     int m = 0;
     for (uint32_t j = 0; j < scene.height; ++j) {
         for (uint32_t i = 0; i < scene.width; ++i) {
             // generate primary ray direction
+            // abbreviation, detail in assignment 5
             float x = (2 * (i + 0.5) / (float)scene.width - 1) *
                       imageAspectRatio * scale;
-            float y = (1 - 2 * (j + 0.5) / (float)scene.height) * scale;
+            float y = (1 - 2 * (j + 0.5) / (float)scene.height) * scale;        // 1 - xxx  frame y from upper left corner
+
             // TODO: Find the x and y positions of the current pixel to get the
             // direction
             //  vector that passes through it.
@@ -56,3 +58,6 @@ void Renderer::Render(const Scene& scene)
     }
     fclose(fp);    
 }
+
+
+// https://zhuanlan.zhihu.com/p/548422361

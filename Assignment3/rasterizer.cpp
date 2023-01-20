@@ -180,6 +180,8 @@ void rst::rasterizer::draw(std::vector<Triangle *> &TriangleList) {
     {
         Triangle newtri = *t;
 
+        // 10/12/2022
+        // to get viewspace position (viewspace: camera at 0 gaze at -z, obejects are not projected.)
         std::array<Eigen::Vector4f, 3> mm {
                 (view * model * t->v[0]),
                 (view * model * t->v[1]),
@@ -188,10 +190,12 @@ void rst::rasterizer::draw(std::vector<Triangle *> &TriangleList) {
 
         std::array<Eigen::Vector3f, 3> viewspace_pos;
 
+        // 10/11/2022   transform: apply func to a range and store the res in 3rd args.
         std::transform(mm.begin(), mm.end(), viewspace_pos.begin(), [](auto& v) {
             return v.template head<3>();
         });
 
+        // position vector of the triangle vertices
         Eigen::Vector4f v[] = {
                 mvp * t->v[0],
                 mvp * t->v[1],
@@ -204,6 +208,12 @@ void rst::rasterizer::draw(std::vector<Triangle *> &TriangleList) {
             vec.z()/=vec.w();
         }
 
+        // 10/12/2022
+        // get viewspace normal direction, but why inverse().transpose()?
+        // 1/10/2023
+        // learnopgl: 
+        // This matrix is called the normal matrix and uses a few linear algebraic operations to 
+        // remove the effect of wrongly scaling the normal vectors
         Eigen::Matrix4f inv_trans = (view * model).inverse().transpose();
         Eigen::Vector4f n[] = {
                 inv_trans * to_vec4(t->normal[0], 0.0f),
@@ -236,6 +246,8 @@ void rst::rasterizer::draw(std::vector<Triangle *> &TriangleList) {
         newtri.setColor(2, 148,121.0,92.0);
 
         // Also pass view space vertice position
+        // newtri:
+        // screenspace pos, viewspace normal?
         rasterize_triangle(newtri, viewspace_pos);
     }
 }
@@ -269,7 +281,7 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
     int minY = std::min(t.v[0].y(), std::min(t.v[1].y(), t.v[2].y()));
     int maxY = std::max(t.v[0].y(), std::max(t.v[1].y(), t.v[2].y()));
 
-    auto v = t.toVector4();
+    auto v = t.toVector4();         // vector<vector<Vector4f>>:   3 vertices vector
 
     for (int x = minX; x <= maxX; x++) {
         for (int y = minY; y <= maxY; y++) {
@@ -284,16 +296,19 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
                 auto interpolated_normal = alpha * t.normal[0] + beta * t.normal[1] + gamma * t.normal[2];
                 auto interpolated_texcoords = alpha * t.tex_coords[0] + beta * t.tex_coords[1] + gamma * t.tex_coords[2];
                 // this line I dont understand
+                // 10/12/2022:
+                // calculate the interpolated viewspace position value
                 auto shadingcoords_interpolated = alpha * view_pos[0] + beta * view_pos[1] + gamma * view_pos[2];
 
-                if (z_interpolated < depth_buf[get_index(x, y)]){
+                if (z_interpolated > depth_buf[get_index(x, y)]){
                      fragment_shader_payload payload( interpolated_color, interpolated_normal.normalized(), interpolated_texcoords, texture ? &*texture : nullptr);
                      payload.view_pos = shadingcoords_interpolated;
                      // Instead of passing the triangle's color directly to the frame buffer, 
                      // pass the color to the shaders first to get the final color;
                      auto pixel_color = fragment_shader(payload);
 
-                     set_pixel(Eigen::Vector2i(x,y), pixel_color);
+                     set_pixel(Eigen::Vector2i(x,y), pixel_color);      // after shader, final color
+                     //set_pixel(Eigen::Vector2i(x, y), interpolated_color);  // without shader   10/11/2022    doesn't work
                      depth_buf[get_index(x, y)] = z_interpolated;
                 }
             }
@@ -341,7 +356,7 @@ void rst::rasterizer::clear(rst::Buffers buff)
     }
     if ((buff & rst::Buffers::Depth) == rst::Buffers::Depth)
     {
-        std::fill(depth_buf.begin(), depth_buf.end(), std::numeric_limits<float>::infinity());
+        std::fill(depth_buf.begin(), depth_buf.end(), -std::numeric_limits<float>::infinity());
     }
 }
 

@@ -21,6 +21,9 @@ Intersection Scene::intersect(const Ray &ray) const
 // https://zhuanlan.zhihu.com/p/370162390
 void Scene::sampleLight(Intersection &pos, float &pdf) const
 {
+    // 12/13/2022
+    // get the total emit area
+    // use the total emit area to randomly choose one emitting object and sample it
     float emit_area_sum = 0;
     for (uint32_t k = 0; k < objects.size(); ++k) {
         if (objects[k]->hasEmit()){
@@ -32,7 +35,8 @@ void Scene::sampleLight(Intersection &pos, float &pdf) const
     for (uint32_t k = 0; k < objects.size(); ++k) {
         if (objects[k]->hasEmit()){
             emit_area_sum += objects[k]->getArea();
-            if (p <= emit_area_sum){
+            if (p <= emit_area_sum){    // find the first light area which satisfies: if it is added to total light area, 
+                                        // total light exceeds the RANDOM generated number
                 objects[k]->Sample(pos, pdf);
                 break;
             }
@@ -78,13 +82,14 @@ Vector3f Scene::castRay(const Ray &ray, int depth) const
             return p_inter.m->getEmission();
 
 
-        
+        // else hit non light object
         // *****************direct contribution from the light source*****************
         float pdf_light = 0.0f;
-        Intersection light_inter;     // x_prime      inter between ray and light plane   A RANDOM SAMPLE from light area
+        Intersection light_inter;     // x_prime      inter of ray on light plane   A RANDOM SAMPLE from light area
         sampleLight(light_inter, pdf_light);    // sample from lights -> get light infos & pdf
+        // 12/23/2022:   ? this is the pdf of one light object, but not the whole light area
+        // why does it work?  my guess: in each spp loop, it only consider one contribution each time
         
-
         //  Get x, ws, NN, emit from inter(my notes: inter with light plane)
         Vector3f p = p_inter.coords;
         Vector3f p_to_light_dir = (light_inter.coords - p).normalized();   // ws
@@ -93,13 +98,16 @@ Vector3f Scene::castRay(const Ray &ray, int depth) const
         Vector3f light_normal = light_inter.normal.normalized();    // NN
         Vector3f emit = light_inter.emit;           // Li from light
 
-        
         // Shoot a ray from p to x
         Ray ray_ws(p, p_to_light_dir);  // ray from p to light
         Intersection ws_inter = this->intersect(ray_ws);    // intersection from p to light
 
         // If the ray is not blocked in the middle
+        // float ws_inter_dis_square = dotProduct(ws_inter.coords - p_inter.coords, ws_inter.coords - p_inter.coords);
+        // if (ws_inter.happened && fabs( sqrt(ws_inter_dis_square) - sqrt(dis_square)) < EPSILON) {   // 
         if (ws_inter.happened && fabs(ws_inter.distance - sqrt(dis_square)) < EPSILON) {
+            //                          ray's travel time       dis/1 == ray travel time        P.S:speed == 1 
+            // formula:
             // L_dir = emit * eval(wo , ws , N) * dot(ws , N) *             dot(ws , N)== cos theta
             // dot(ws , NN) / |x - p | ^ 2 / pdf_light                      dot(ws , NN) == cos theta prime
             // wo: ray_to_p
@@ -122,6 +130,8 @@ Vector3f Scene::castRay(const Ray &ray, int depth) const
         }
 
         // get a random Wo direction
+        // sample(const Vector3f wi, const Vector3f N) 
+        // 按照该材质的性质，给定入射方向与法向量，用某种分布采样一个出射方向
         Vector3f p_to_object_dir = p_inter.m->sample(ray.direction, p_inter.normal.normalized()).normalized();
         Ray ray_p_object(p_inter.coords, p_to_object_dir);
 

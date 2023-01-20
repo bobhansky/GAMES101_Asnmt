@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     Scene scene(784, 784);
 
     Material* red = new Material(DIFFUSE, Vector3f(0.0f));
-    red->Kd = Vector3f(0.63f, 0.065f, 0.05f);
+    red->Kd = Vector3f(0.63f, 0.065f, 0.05f);       // 12/13/2022   Kd: Bling Phon reflection model, diffuse
     Material* green = new Material(DIFFUSE, Vector3f(0.0f));
     green->Kd = Vector3f(0.14f, 0.45f, 0.091f);
     Material* white = new Material(DIFFUSE, Vector3f(0.0f));

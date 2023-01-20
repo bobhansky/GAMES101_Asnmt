@@ -233,9 +233,11 @@ inline Bounds3 Triangle::getBounds() { return Union(Bounds3(v0, v1), v2); }
 inline Intersection Triangle::getIntersection(Ray ray)
 {
     Intersection inter;
-
+    
+    // angle between ray.dir and normal grater than 90 degree (shoot under the surface)
     if (dotProduct(ray.direction, normal) > 0)
         return inter;
+
     double u, v, t_tmp = 0;
     Vector3f pvec = crossProduct(ray.direction, e2);
     double det = dotProduct(e1, pvec);
@@ -260,7 +262,9 @@ inline Intersection Triangle::getIntersection(Ray ray)
     inter.normal = this->normal;
     inter.m = this->m;
     inter.obj = this;
-    // 距离用时间代替
+    // 距离用时间代替    ??? what is this by 12/23/2022. tavel time but I never use it?
+    // ans on the same day: I use it. in computer 3d world the ray vector has the direction ,and it is a unit vector
+    // namely, magnitude/length/speed == 1
     inter.distance = t_tmp;
 
 
