@@ -11,7 +11,7 @@
 #include <stdexcept>
 #include <tuple>
 
-#define SSAA true        // SSAA swich
+#define SSAA false        // SSAA swich
 
 rst::pos_buf_id rst::rasterizer::load_positions(const std::vector<Eigen::Vector3f>& positions)
 {
@@ -99,6 +99,7 @@ void rst::rasterizer::draw(pos_buf_id pos_buffer, ind_buf_id ind_buffer, col_buf
 				mvp * to_vec4(buf[i[1]], 1.0f),
 				mvp * to_vec4(buf[i[2]], 1.0f)
 		};
+
 		//Homogeneous division
 		for (auto& vec : v) {
 			vec /= vec.w();

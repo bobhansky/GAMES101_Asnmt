@@ -1,5 +1,5 @@
 ﻿  Renderer.cpp
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment5\global.hpp(55,13): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment5\Renderer.cpp(8,20): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
-D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment5\Renderer.cpp(217,46): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment5\global.hpp(55,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment5\Renderer.cpp(8,20): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+D:\Documents\cpp_workplace\CG\GAMES101\Assignments\Assignment5\Renderer.cpp(219,46): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
   Assignment5.vcxproj -> D:\Documents\cpp_workplace\CG\GAMES101\Assignments\x64\Debug\Assignment5.exe
