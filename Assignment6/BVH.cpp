@@ -25,6 +25,7 @@ BVHAccel::BVHAccel(std::vector<Object*> p, int maxPrimsInNode,
         hrs, mins, secs);
 }
 
+
 BVHBuildNode* BVHAccel::recursiveBuild(std::vector<Object*> objects)
 {
     BVHBuildNode* node = new BVHBuildNode();
@@ -49,11 +50,14 @@ BVHBuildNode* BVHAccel::recursiveBuild(std::vector<Object*> objects)
         node->bounds = Union(node->left->bounds, node->right->bounds);
         return node;
     }
+    // comment by bobhansky 5/3/2023
     else {
+        // the bounds contains all the centroid of the objects bound
         Bounds3 centroidBounds;
         for (int i = 0; i < objects.size(); ++i)
             centroidBounds =
                 Union(centroidBounds, objects[i]->getBounds().Centroid());
+
         int dim = centroidBounds.maxExtent();
         switch (dim) {
         case 0:
@@ -94,6 +98,7 @@ BVHBuildNode* BVHAccel::recursiveBuild(std::vector<Object*> objects)
     return node;
 }
 
+
 Intersection BVHAccel::Intersect(const Ray& ray) const
 {
     Intersection isect;
@@ -103,10 +108,13 @@ Intersection BVHAccel::Intersect(const Ray& ray) const
     return isect;
 }
 
+
+
 Intersection BVHAccel::getIntersection(BVHBuildNode* node, const Ray& ray) const
 {
     // TODO Traverse the BVH to find intersection
     Intersection result;
+    if (!node) return result;
 
     std::array<int, 3> dirIsNeg;    // sign of the direction
     dirIsNeg[0] = int(ray.direction[0] > 0);

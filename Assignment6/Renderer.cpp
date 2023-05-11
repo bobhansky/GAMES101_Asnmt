@@ -21,7 +21,7 @@ void Renderer::Render(const Scene& scene)
     float scale = tan(deg2rad(scene.fov * 0.5));        // h : near plane
     float imageAspectRatio = scene.width / (float)scene.height;
     Vector3f eye_pos(-1, 5, 10);
-    int m = 0;
+    int m = 0;          // framebuffer index
     for (uint32_t j = 0; j < scene.height; ++j) {
         for (uint32_t i = 0; i < scene.width; ++i) {
             // generate primary ray direction

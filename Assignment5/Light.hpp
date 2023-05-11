@@ -9,7 +9,7 @@ public:
         : position(p)
         , intensity(i)
     {}
-    virtual ~Light() = default;
+    virtual ~Light(){};
     Vector3f position;
     Vector3f intensity;
 };

@@ -100,14 +100,14 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     Eigen::Matrix4f per_to_ortho;
     per_to_ortho << zNear, 0, 0, 0,
                     0, zNear, 0, 0,
-                    0, 0, zNear + zFar, -zNear * zFar,
-                    0, 0, 1, 0;
+                    0, 0, zNear + zFar, zNear * zFar,
+                    0, 0, -1, 0;
 
 
     // orthogonal projection part
     // fov is in degrees
 
-    float t = std::tan((eye_fov / 2) * MY_PI / 180) * ( -zNear);    // tan() takes radians
+    float t = std::tan((eye_fov / 2) * MY_PI / 180) * ( zNear);    // tan() takes radians
     float b = -t;
     float r = aspect_ratio * t;
     float l = -r;
@@ -121,7 +121,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     Eigen::Matrix4f orth_scale;
     orth_scale << 2 / (r - l), 0, 0, 0,
         0, 2 / (t - b), 0, 0,
-        0, 0, 2 / (zNear - zFar), 0,            
+        0, 0, 2 / (zNear - zFar), 0,            // (zNear - zFar) < 0, then flip the z sign
         0, 0, 0, 1;
 
     Eigen::Matrix4f ortho_proj = orth_scale * orth_translate;

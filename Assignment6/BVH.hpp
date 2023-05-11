@@ -29,12 +29,9 @@ public:
 
     // BVHAccel Public Methods
     BVHAccel(std::vector<Object*> p, int maxPrimsInNode = 1, SplitMethod splitMethod = SplitMethod::NAIVE);
-    Bounds3 WorldBound() const;
-    ~BVHAccel();
 
     Intersection Intersect(const Ray &ray) const;
     Intersection getIntersection(BVHBuildNode* node, const Ray& ray)const;
-    bool IntersectP(const Ray &ray) const;
     BVHBuildNode* root;
 
     // BVHAccel Private Methods
@@ -45,6 +42,8 @@ public:
     const SplitMethod splitMethod;
     std::vector<Object*> primitives;
 };
+
+
 
 struct BVHBuildNode {
     Bounds3 bounds;
